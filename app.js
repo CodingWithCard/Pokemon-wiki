@@ -8,8 +8,7 @@ const setBanner = (title, sub) => {
   $("#banner-sub").textContent = sub || "";
 };
 
-// ----- Sprite sources -----
-// Large official artwork when we have numeric ID; otherwise fallback to a form sprite CDN.
+// Sprite sources (large official art if ID, fallback sprite for forms)
 const spriteURL = (p) => {
   if (p.id) {
     return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${p.id}.png`;
@@ -26,6 +25,10 @@ const eggDot = (km) => {
   return `<span class="eggdot" style="--c:${color}"></span>`;
 };
 
+// External Pokédex links for Eggs
+const hubUrl = (slug) => `https://pokemongohub.net/pokedex/pokemon-go/${slug}/`;
+const gpUrl = (slug) => `https://gamepress.gg/pokemongo/pokemon/${slug}`;
+
 // ---------- PAGES ----------
 const Home = () => {
   setBanner(
@@ -41,7 +44,8 @@ const Home = () => {
         <a class="card" href="#/raids-bosse"><div class="icon i-raids">⚔️</div><div class="name">Raids &amp; Bosse</div><div class="small">Aktuelle Bosse, Tipps & Konter.</div><span class="btn">Öffnen</span></a>
         <a class="card" href="#/events"><div class="icon i-events">📅</div><div class="name">Events</div><div class="small">Spotlight, Raid Hour & Community Day.</div><span class="btn">Öffnen</span></a>
         <a class="card" href="#/pvp-kaempfe"><div class="icon i-pvp">🥇</div><div class="name">PvP & Kämpfe</div><div class="small">Ligen, Basics & Ressourcen.</div><span class="btn">Öffnen</span></a>
-        <a class="card" href="#/eier-ausbruten"><div class="icon i-eggs">🥚</div><div class="name">Eier & Ausbrüten</div><div class="small">Eier-Typen & Effizienz.</div><span class="btn">Öffnen</span></a>
+        <a class="card" href="#/eier-ausbruten"><div class="icon i-eggs">🥚</div><div class="name">Eier & Ausbrüten</div><div class="small">Eier-Pools & Effizienz.</div><span class="btn">Öffnen</span></a>
+        <a class="card" href="#/team-rocket"><div class="icon i-raids">🅁</div><div class="name">Team Rocket</div><div class="small">Aktuelle Shadow-Bosse & Lineups.</div><span class="btn">Öffnen</span></a>
         <a class="card" href="#/ressourcen"><div class="icon i-links">🔗</div><div class="name">Ressourcen</div><div class="small">Top-Webseiten & Tools.</div><span class="btn">Öffnen</span></a>
       </div>
     </section>`;
@@ -57,25 +61,19 @@ const FAQ = () => {
       <details open><summary><span class="pill">RAID</span> Wie trete ich einem Raid bei?</summary>
         <p>Tippe auf eine Arena mit einem Raid, wähle „Kämpfen“ und nutze einen Raid-Pass. Für Fernraids brauchst du einen Fern-Raid-Pass.</p>
       </details>
-
       <details><summary><span class="pill">EX</span> Was sind EX-Raids?</summary>
         <p>Spezielle Einladungs-Raids an ausgewählten Arenen. Einladungen erhält man, wenn man dort zuvor Raids absolviert hat.</p>
       </details>
-
       <details><summary><span class="pill">IV</span> Was bedeutet IV und wie berechne ich %?</summary>
         <p>„Individual Values“ – versteckte Werte (Angriff, Verteidigung, Ausdauer). Jeder Wert 0–15. 100% = <strong>15-15-15</strong> = <strong>45</strong> Gesamt.</p>
-        <p><strong>Formel:</strong> (Summe der drei Werte / 45) × 100.<br>
-        Beispiel: <code>15 + 15 + 14 = 44</code> → <code>44 ÷ 45 ≈ 0,977…</code> → ≈ <strong>98%</strong>.</p>
+        <p><strong>Formel:</strong> (Summe der drei Werte / 45) × 100. Beispiel: <code>44 ÷ 45 ≈ 0,977…</code> → ≈ <strong>98%</strong>.</p>
       </details>
-
       <details><summary><span class="pill">PASS</span> Wie bekomme ich Fern-Raid-Pässe?</summary>
         <p>Im In-Game-Shop kaufen; gelegentlich als Event-Belohnung erhältlich.</p>
       </details>
-
       <details><summary><span class="pill">FRIEND</span> Wie finde ich neue Freunde?</summary>
         <p>Teile deinen Trainercode in unserer Community oder nutze Foren/Discords.</p>
       </details>
-
       <details><summary><span class="pill">COINS</span> Woher bekomme ich PokéMünzen?</summary>
         <ol>
           <li><strong>Arena-Verteidigung:</strong> Bis zu 50 Münzen/Tag, wenn dein Pokémon nach Einsatz in einer Arena besiegt wird.</li>
@@ -85,8 +83,9 @@ const FAQ = () => {
     </section>`;
 };
 
+// ---- Raids with images ----
 const Raids = async () => {
-  setBanner("Raids & Bosse", "Aktuelle Tierliste, Konter & Tipps");
+  setBanner("Raids & Bosse", "Aktuelle Tierliste, Konter & Bilder");
   let raids;
   try {
     raids = await fetch(`data/raids.json?v=${Date.now()}`).then((r) =>
@@ -100,39 +99,41 @@ const Raids = async () => {
     return;
   }
 
-  const fiveStar =
-    (raids.five_star?.active || [])
+  const renderList = (arr) =>
+    arr
       .map(
         (r) => `
     <div class="row">
-      <div>
-        <span class="pill">${r.tier}</span> <strong>${r.name}</strong>
-        <div class="small">Von ${r.start} bis ${r.end}</div>
+      <div class="mon-row">
         ${
-          r.counters_hint
-            ? `<div class="konter">Konter: ${r.counters_hint}</div>`
+          r.id || r.slug
+            ? `<img class="mon-icon" loading="lazy" src="${spriteURL(
+                r
+              )}" alt="${r.name}">`
             : ""
         }
+        <div>
+          <div class="mon-name"><span class="pill">${r.tier}</span> ${
+          r.name
+        }</div>
+          <div class="small">Von ${r.start} bis ${r.end}</div>
+          ${
+            r.counters_hint
+              ? `<div class="konter">Konter: ${r.counters_hint}</div>`
+              : ""
+          }
+        </div>
       </div>
-      <div>⭐</div>
     </div>`
       )
-      .join("") || "<p class='small'>Keine 5★-Raids aktiv.</p>";
+      .join("");
 
-  const mega =
-    (raids.mega_raids?.active || [])
-      .map(
-        (r) => `
-    <div class="row">
-      <div>
-        <span class="pill">${r.tier}</span> <strong>${r.name}</strong>
-        <div class="small">Von ${r.start} bis ${r.end}</div>
-      </div>
-      <div>🔥</div>
-    </div>`
-      )
-      .join("") || "<p class='small'>Keine Mega-Raids aktiv.</p>";
-
+  const fiveStar = raids.five_star?.active?.length
+    ? renderList(raids.five_star.active)
+    : "<p class='small'>Keine 5★-Raids aktiv.</p>";
+  const mega = raids.mega_raids?.active?.length
+    ? renderList(raids.mega_raids.active)
+    : "<p class='small'>Keine Mega-Raids aktiv.</p>";
   const shadow = raids.shadow_raids?.five_star_weekend
     ? `
     <div class="row">
@@ -141,7 +142,6 @@ const Raids = async () => {
         <strong>${raids.shadow_raids.five_star_weekend.name}</strong>
         <div class="small">${raids.shadow_raids.five_star_weekend.schedule}</div>
       </div>
-      <div>👥</div>
     </div>`
     : "<p class='small'>Keine Shadow-Raids Infos.</p>";
 
@@ -156,18 +156,17 @@ const Raids = async () => {
         <h3 style="margin-top:0">Tipps</h3>
         <ul>
           <li>Typ-Vorteile nutzen (z. B. Elektro &gt; Wasser, Gestein &gt; Flug).</li>
-          <li>Vor dem Start im Chat absprechen, Lobbys koordinieren.</li>
-          <li>Nach dem Raid Tränke/Beleber einsetzen.</li>
+          <li>Lobbys koordinieren, richtige Konter wählen.</li>
         </ul>
-        ${
-          raids.links?.raid_guide
-            ? `<p><a class="btn btn-primary" href="${raids.links.raid_guide}" target="_blank" rel="noopener">Aktuelle Konter & Bosse</a></p>`
-            : ""
-        }
+        <p><a class="btn btn-primary" href="${
+          raids.links?.raid_guide || "https://www.pokebattler.com/raids"
+        }" target="_blank" rel="noopener">Aktuelle Konter & Bosse</a></p>
+        <p class="small">Zuletzt aktualisiert: ${raids.last_updated || ""}</p>
       </div>
     </section>`;
 };
 
+// ---- Events (unchanged) ----
 const Events = async () => {
   setBanner("Events", "Spotlight Hour, Raid Hour, Community Day & mehr");
   let events;
@@ -227,10 +226,7 @@ const Events = async () => {
     </section>`;
 };
 
-// Helper urls for external Pokédex pages (use slug; works for forms too)
-const hubUrl = (slug) => `https://pokemongohub.net/pokedex/pokemon-go/${slug}/`;
-const gpUrl = (slug) => `https://gamepress.gg/pokemongo/pokemon/${slug}`;
-
+// ---- Eggs with external links (unchanged from last step) ----
 const Eggs = async () => {
   setBanner("Eier & Ausbrüten", "Eiertypen, Pokémon-Pools & Effizienz");
   let data;
@@ -287,7 +283,7 @@ const Eggs = async () => {
       </div>
       <div class="card" style="margin-top:14px">
         <h3 style="margin-top:0">Hinweis & Quellen</h3>
-        <p class="small">Pools ändern sich innerhalb der Saison monatlich. Prüfe bei Bedarf:</p>
+        <p class="small">Pools ändern sich häufig. Prüfe bei Bedarf:</p>
         <ul class="small">
           <li><a target="_blank" rel="noopener" href="https://leekduck.com/eggs/">LeekDuck – Current Eggs</a></li>
           <li><a target="_blank" rel="noopener" href="https://pokemongohub.net/post/chart/pokemon-go-eggs/">GO Hub – Egg-Chart</a></li>
@@ -295,6 +291,122 @@ const Eggs = async () => {
         <p class="small">Zuletzt aktualisiert: ${data.last_updated}</p>
       </div>
     </section>`;
+};
+
+// ---- Team GO Rocket page ----
+const Rocket = async () => {
+  setBanner("Team GO Rocket", "Aktuelle Shadow-Pokémon, Leiter & Giovanni");
+  let rocket;
+  try {
+    rocket = await fetch(`data/rocket.json?v=${Date.now()}`).then((r) =>
+      r.json()
+    );
+  } catch {
+    rocket = null;
+  }
+  if (!rocket) {
+    app.innerHTML = `<section class="section"><p class="small">Fehler beim Laden der Rocket-Daten.</p></section>`;
+    return;
+  }
+
+  // Grunts (compact)
+  const grunts = (rocket.grunts || [])
+    .map(
+      (g) => `
+    <div class="card">
+      <div class="badge">${g.type}</div>
+      ${(g.lineup || [])
+        .map(
+          (p) => `
+        <div class="mon-row">
+          <img class="mon-icon sm" loading="lazy" src="${spriteURL(p)}" alt="${
+            p.name
+          }">
+          <div class="mon-name">${p.name}</div>
+        </div>
+      `
+        )
+        .join("")}
+    </div>
+  `
+    )
+    .join("");
+
+  // Leaders (Cliff/Sierra/Arlo)
+  const leaders = (rocket.leaders || [])
+    .map(
+      (l) => `
+    <div class="card">
+      <div class="badge">Leader ${l.name}</div>
+      ${(l.teams || [])
+        .map(
+          (team, i) => `
+        <div class="row"><strong>Slot ${i + 1}</strong></div>
+        ${team
+          .map(
+            (p) => `
+          <div class="mon-row">
+            <img class="mon-icon sm" loading="lazy" src="${spriteURL(
+              p
+            )}" alt="${p.name}">
+            <div class="mon-name">${p.name}</div>
+          </div>
+        `
+          )
+          .join("")}
+      `
+        )
+        .join("")}
+    </div>
+  `
+    )
+    .join("");
+
+  // Giovanni
+  const boss = rocket.boss
+    ? `
+    <div class="card">
+      <div class="badge">Giovanni</div>
+      ${(rocket.boss.lineup || [])
+        .map(
+          (slot, i) => `
+        <div class="row"><strong>Slot ${i + 1}</strong></div>
+        ${slot
+          .map(
+            (p) => `
+          <div class="mon-row">
+            <img class="mon-icon sm" loading="lazy" src="${spriteURL(
+              p
+            )}" alt="${p.name}">
+            <div class="mon-name">${p.name}</div>
+          </div>
+        `
+          )
+          .join("")}
+      `
+        )
+        .join("")}
+      ${rocket.boss.notes ? `<p class="small">${rocket.boss.notes}</p>` : ""}
+    </div>
+  `
+    : "";
+
+  app.innerHTML = `
+    <section class="section">
+      <div class="badge">Grunts</div>
+      <div class="flex-grid">${grunts}</div>
+    </section>
+    <section class="section">
+      <div class="badge">Leiter</div>
+      <div class="flex-grid">${leaders}</div>
+    </section>
+    <section class="section">
+      ${boss}
+      <p class="small">Zuletzt aktualisiert: ${
+        rocket.last_updated || ""
+      }. Quellen: LeekDuck „Rocket“ / GO Hub „Rocket“. Passen sich oft monatlich an.</p>
+    </section>
+  `;
 };
 
 const PvP = () => {
@@ -337,7 +449,7 @@ const Resources = () => {
     </section>`;
 };
 
-// ---------- Router ----------
+// Router
 const routes = {
   "": Home,
   "/": Home,
@@ -346,6 +458,7 @@ const routes = {
   "/events": Events,
   "/pvp-kaempfe": PvP,
   "/eier-ausbruten": Eggs,
+  "/team-rocket": Rocket,
   "/ressourcen": Resources,
 };
 function router() {

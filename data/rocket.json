@@ -1,0 +1,81 @@
+{
+  "last_updated": "23-09-2025",
+  "note": "Leader & Boss basierend auf GO Hub Links (Sep 2025).",
+  "grunts": [
+    {
+      "type": "Gift-Grunt",
+      "lineup": [
+        { "name": "Sleima", "id": 88, "slug": "grimer" },
+        { "name": "Sniebel", "id": 215, "slug": "sneasel" },
+        { "name": "Nidoqueen", "id": 31, "slug": "nidoqueen" }
+      ]
+    },
+    {
+      "type": "Drache-Grunt",
+      "lineup": [
+        { "name": "Dratini", "id": 147, "slug": "dratini" },
+        { "name": "Dragonir", "id": 148, "slug": "dragonair" },
+        { "name": "Dragoran", "id": 149, "slug": "dragonite" }
+      ]
+    }
+  ],
+  "leaders": [
+    {
+      "name": "Arlo",
+      "teams": [
+        [{ "name": "Crypto-Woingenau", "id": 202, "slug": "wobbuffet" }],
+        [
+          { "name": "Crypto-Laschoking", "id": 80, "slug": "slowbro" },
+          { "name": "Crypto-Iksbat", "id": 169, "slug": "crobat" },
+          { "name": "Crypto-Stahlos", "id": 208, "slug": "steelix" }
+        ],
+        [
+          { "name": "Crypto-Scherox", "id": 212, "slug": "scizor" },
+          { "name": "Crypto-Simsala", "id": 65, "slug": "alakazam" },
+          { "name": "Crypto-Alola-Sleimok", "id": 89, "slug": "muk-alola" }
+        ]
+      ]
+    },
+    {
+      "name": "Cliff",
+      "teams": [
+        [{ "name": "Crypto-Larvitar", "id": 246, "slug": "larvitar" }],
+        [
+          { "name": "Crypto-Panzaeron", "id": 227, "slug": "skarmory" },
+          { "name": "Crypto-Kramshef", "id": 430, "slug": "honchkrow" },
+          { "name": "Crypto-Annihilape", "id": 979, "slug": "annihilape" }
+        ],
+        [
+          { "name": "Crypto-Despotar", "id": 248, "slug": "tyranitar" },
+          { "name": "Crypto-Machomei", "id": 68, "slug": "machamp" },
+          { "name": "Crypto-Luxtra", "id": 405, "slug": "luxray" }
+        ]
+      ]
+    },
+    {
+      "name": "Sierra",
+      "teams": [
+        [{ "name": "Crypto-Barschwa", "id": 349, "slug": "feebas" }],
+        [
+          { "name": "Crypto-Staraptor", "id": 398, "slug": "staraptor" },
+          { "name": "Crypto-Traunmagil", "id": 429, "slug": "mismagius" },
+          { "name": "Crypto-Tentantel", "id": 598, "slug": "ferrothorn" }
+        ],
+        [
+          { "name": "Crypto-Camerupt", "id": 323, "slug": "camerupt" },
+          { "name": "Crypto-Piondragi", "id": 452, "slug": "drapion" },
+          { "name": "Crypto-Hundemon", "id": 229, "slug": "houndoom" }
+        ]
+      ]
+    }
+  ],
+  "boss": {
+    "name": "Giovanni",
+    "lineup": [
+      [{ "name": "Snobilikat", "id": 53, "slug": "persian" }],
+      [{ "name": "Seemon", "id": 80, "slug": "slowbro" }],
+      [{ "name": "Schatten-Kyogre", "id": 382, "slug": "kyogre" }]
+    ],
+    "notes": "Giovannis Slots rotieren; korrekter aktueller Stand laut GO Hub Counter Guide (Ende Sep 2025)."
+  }
+}

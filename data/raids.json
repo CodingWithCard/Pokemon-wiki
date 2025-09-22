@@ -5,6 +5,8 @@
     "active": [
       {
         "name": "Dialga (Origin)",
+        "id": 483,
+        "slug": "dialga-origin",
         "tier": "5★",
         "start": "23-09-2025 10:00",
         "end": "07-10-2025 10:00",
@@ -14,12 +16,14 @@
         "counters_hint": "Kampf, Boden"
       }
     ],
-    "tba_after_07_10": "Noch nicht angekündigt (Platzhalter)."
+    "tba_after_07_10": "Noch nicht angekündigt."
   },
   "mega_raids": {
     "active": [
       {
         "name": "Mega Stolloss (Steelix)",
+        "id": 208,
+        "slug": "steelix",
         "tier": "Mega",
         "start": "30-09-2025 10:00",
         "end": "07-10-2025 10:00",
@@ -27,6 +31,8 @@
       },
       {
         "name": "Mega Scherox (Scizor)",
+        "id": 212,
+        "slug": "scizor",
         "tier": "Mega",
         "start": "30-09-2025 10:00",
         "end": "07-10-2025 10:00",
@@ -34,6 +40,8 @@
       },
       {
         "name": "Mega Lucario",
+        "id": 448,
+        "slug": "lucario",
         "tier": "Mega",
         "start": "30-09-2025 10:00",
         "end": "07-10-2025 10:00",
@@ -43,9 +51,7 @@
     "raid_day": {
       "name": "Mega Metagross Raid Day",
       "date": "04-10-2025 14:00–17:00",
-      "bonuses": [
-        "Zusätzliche EP/Staub während des Fensters (laut Eventdetails)"
-      ],
+      "bonuses": ["Zusätzliche EP/Staub während des Fensters"],
       "notes": "Spezialfenster; außerhalb des Zeitraums nicht in regulären Mega-Eiern."
     }
   },
@@ -58,8 +64,6 @@
     }
   },
   "links": {
-    "dialga_event": "https://leekduck.com/events/dialga-in-5-star-raid-battles-september-october-2025/",
-    "mega_rotation_30_09_to_07_10": "https://pokemongohub.net/post/event/pokemon-go-september-2025-events/",
-    "mega_metagross_raid_day": "https://leekduck.com/events/mega-metagross-raid-day-october-2025/"
+    "raid_guide": "https://www.pokebattler.com/raids"
   }
 }
