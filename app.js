@@ -462,7 +462,21 @@ const routes = {
   "/ressourcen": Resources,
 };
 function router() {
-  const hash = location.hash.replace(/^#/, "");
+  // decode, trim trailing slashes
+  let hash = decodeURIComponent(location.hash.replace(/^#/, "")).replace(
+    /\/+$/,
+    ""
+  );
+  if (!hash) hash = "/";
+
+  // some robust aliases
+  const aliases = {
+    "/teamrocket": "/team-rocket",
+    "/team%20rocket": "/team-rocket",
+    "/team_rocket": "/team-rocket",
+  };
+  hash = aliases[hash] || hash;
+
   const view =
     routes[hash] ||
     (() => {
