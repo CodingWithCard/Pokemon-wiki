@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Pokémon GO Wissensbasis</title>
+    <meta
+      name="description"
+      content="Pokémon GO Community Wiki – Raids, Events, PvP, Eier, FAQ & Ressourcen."
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='48' fill='%23e5e7eb'/><path d='M4 50h92' stroke='%23111' stroke-width='10'/><circle cx='50' cy='50' r='16' fill='%23e5e7eb' stroke='%23111' stroke-width='6'/><path d='M50 2a48 48 0 0146 35H4A48 48 0 0150 2z' fill='%23ef4444'/></svg>"
+    />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="container">
+        <a class="brand" href="#/">Pokémon GO Wiki</a>
+        <nav class="nav">
+          <a href="#/faq">FAQ</a>
+          <a href="#/raids-bosse">Raids & Bosse</a>
+          <a href="#/events">Events</a>
+          <a href="#/pvp-kaempfe">PvP</a>
+          <a href="#/eier-ausbruten">Eier</a>
+          <a href="#/ressourcen">Ressourcen</a>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Banner (shared across pages; title/subtitle set by JS) -->
+    <section class="banner">
+      <div
+        class="banner-image"
+        style="
+          --src: url('https://drive.google.com/thumbnail?id=1jJX-md52wqNCTo_Dbfw4KYWQI75gNBe-&sz=w2000');
+        "
+      ></div>
+      <div class="banner-overlay">
+        <h1 id="banner-title">Pokémon GO Wissensbasis</h1>
+        <p id="banner-sub">
+          Dein schneller Weg zu Antworten – gemacht von unserer Community.
+        </p>
+      </div>
+    </section>
+
+    <!-- Main content -->
+    <main id="app" class="container"></main>
+
+    <footer class="footer">
+      <div class="container">
+        <span>© <span id="y"></span> Community Wiki</span>
+        <span class="sep">•</span>
+        <a href="#/faq">FAQ</a>
+        <span class="sep">•</span>
+        <a href="#/ressourcen">Ressourcen</a>
+      </div>
+    </footer>
+
+    <script src="app.js" defer></script>
+  </body>
+</html>

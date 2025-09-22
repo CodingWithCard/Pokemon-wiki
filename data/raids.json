@@ -1,0 +1,65 @@
+{
+  "last_updated": "23-09-2025",
+  "season": "Tales of Transformation",
+  "five_star": {
+    "active": [
+      {
+        "name": "Dialga (Origin)",
+        "tier": "5★",
+        "start": "23-09-2025 10:00",
+        "end": "07-10-2025 10:00",
+        "notes": "Raid Hour am 01-10-2025, 18:00–19:00 (lokal).",
+        "shiny": true,
+        "type": ["Stahl", "Drache"],
+        "counters_hint": "Kampf, Boden"
+      }
+    ],
+    "tba_after_07_10": "Noch nicht angekündigt (Platzhalter)."
+  },
+  "mega_raids": {
+    "active": [
+      {
+        "name": "Mega Stolloss (Steelix)",
+        "tier": "Mega",
+        "start": "30-09-2025 10:00",
+        "end": "07-10-2025 10:00",
+        "shiny": true
+      },
+      {
+        "name": "Mega Scherox (Scizor)",
+        "tier": "Mega",
+        "start": "30-09-2025 10:00",
+        "end": "07-10-2025 10:00",
+        "shiny": true
+      },
+      {
+        "name": "Mega Lucario",
+        "tier": "Mega",
+        "start": "30-09-2025 10:00",
+        "end": "07-10-2025 10:00",
+        "shiny": true
+      }
+    ],
+    "raid_day": {
+      "name": "Mega Metagross Raid Day",
+      "date": "04-10-2025 14:00–17:00",
+      "bonuses": [
+        "Zusätzliche EP/Staub während des Fensters (laut Eventdetails)"
+      ],
+      "notes": "Spezialfenster; außerhalb des Zeitraums nicht in regulären Mega-Eiern."
+    }
+  },
+  "shadow_raids": {
+    "five_star_weekend": {
+      "name": "5★ Shadow-Raid (wechselnd)",
+      "tier": "5★ (Shadow)",
+      "schedule": "Samstag & Sonntag",
+      "notes": "5★-Shadow-Raids finden normalerweise nur am Wochenende statt; Boss rotiert."
+    }
+  },
+  "links": {
+    "dialga_event": "https://leekduck.com/events/dialga-in-5-star-raid-battles-september-october-2025/",
+    "mega_rotation_30_09_to_07_10": "https://pokemongohub.net/post/event/pokemon-go-september-2025-events/",
+    "mega_metagross_raid_day": "https://leekduck.com/events/mega-metagross-raid-day-october-2025/"
+  }
+}
