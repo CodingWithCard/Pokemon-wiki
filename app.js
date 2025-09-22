@@ -1,15 +1,32 @@
-// Small helper
+// Helpers
 const $ = (sel) => document.querySelector(sel);
 const app = $("#app");
 $("#y").textContent = new Date().getFullYear();
 
-// Banner updater
 const setBanner = (title, sub) => {
   $("#banner-title").textContent = title;
   $("#banner-sub").textContent = sub || "";
 };
 
-// --- Home ---
+// ----- Sprite sources -----
+// Large official artwork when we have numeric ID; otherwise fallback to a form sprite CDN.
+const spriteURL = (p) => {
+  if (p.id) {
+    return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${p.id}.png`;
+  }
+  return `https://raw.githubusercontent.com/msikma/pokesprite/master/pokemon-gen8/regular/${p.slug}.png`;
+};
+
+// Colored egg marker
+const eggDot = (km) => {
+  const color =
+    { 2: "#4ade80", 5: "#fb923c", 7: "#facc15", 10: "#a78bfa", 12: "#ef4444" }[
+      km
+    ] || "#e5e7eb";
+  return `<span class="eggdot" style="--c:${color}"></span>`;
+};
+
+// ---------- PAGES ----------
 const Home = () => {
   setBanner(
     "Pokémon GO Wissensbasis",
@@ -30,7 +47,6 @@ const Home = () => {
     </section>`;
 };
 
-// --- FAQ ---
 const FAQ = () => {
   setBanner(
     "Häufig gestellte Fragen",
@@ -46,20 +62,10 @@ const FAQ = () => {
         <p>Spezielle Einladungs-Raids an ausgewählten Arenen. Einladungen erhält man, wenn man dort zuvor Raids absolviert hat.</p>
       </details>
 
-      <details><summary><span class="pill">IV</span> Was bedeutet IV?</summary>
-        <p>
-          „Individual Values“ – versteckte Werte (Angriff, Verteidigung, Ausdauer), die die Stärke eines Pokémon bestimmen.<br>
-          Jeder Wert reicht von 0 bis 15. Ein perfektes Pokémon (100%) hat also <strong>15-15-15</strong> = insgesamt <strong>45</strong>.
-        </p>
-        <p>
-          Um den IV-Prozentsatz zu berechnen:
-          <ul>
-            <li>Addiere die drei Werte (z. B. 15 + 15 + 14 = 44).</li>
-            <li>Teile durch 45 (das Maximum).</li>
-            <li>Multipliziere mit 100, um den Prozentsatz zu erhalten.</li>
-          </ul>
-          Beispiel: <code>44 ÷ 45 ≈ 0,977...</code> → ≈ <strong>98%</strong>.
-        </p>
+      <details><summary><span class="pill">IV</span> Was bedeutet IV und wie berechne ich %?</summary>
+        <p>„Individual Values“ – versteckte Werte (Angriff, Verteidigung, Ausdauer). Jeder Wert 0–15. 100% = <strong>15-15-15</strong> = <strong>45</strong> Gesamt.</p>
+        <p><strong>Formel:</strong> (Summe der drei Werte / 45) × 100.<br>
+        Beispiel: <code>15 + 15 + 14 = 44</code> → <code>44 ÷ 45 ≈ 0,977…</code> → ≈ <strong>98%</strong>.</p>
       </details>
 
       <details><summary><span class="pill">PASS</span> Wie bekomme ich Fern-Raid-Pässe?</summary>
@@ -79,12 +85,13 @@ const FAQ = () => {
     </section>`;
 };
 
-// --- Raids ---
 const Raids = async () => {
   setBanner("Raids & Bosse", "Aktuelle Tierliste, Konter & Tipps");
   let raids;
   try {
-    raids = await fetch("data/raids.json").then((r) => r.json());
+    raids = await fetch(`data/raids.json?v=${Date.now()}`).then((r) =>
+      r.json()
+    );
   } catch {
     raids = null;
   }
@@ -99,8 +106,7 @@ const Raids = async () => {
         (r) => `
     <div class="row">
       <div>
-        <span class="pill">${r.tier}</span>
-        <strong>${r.name}</strong>
+        <span class="pill">${r.tier}</span> <strong>${r.name}</strong>
         <div class="small">Von ${r.start} bis ${r.end}</div>
         ${
           r.counters_hint
@@ -119,8 +125,7 @@ const Raids = async () => {
         (r) => `
     <div class="row">
       <div>
-        <span class="pill">${r.tier}</span>
-        <strong>${r.name}</strong>
+        <span class="pill">${r.tier}</span> <strong>${r.name}</strong>
         <div class="small">Von ${r.start} bis ${r.end}</div>
       </div>
       <div>🔥</div>
@@ -154,17 +159,22 @@ const Raids = async () => {
           <li>Vor dem Start im Chat absprechen, Lobbys koordinieren.</li>
           <li>Nach dem Raid Tränke/Beleber einsetzen.</li>
         </ul>
-        <p><a class="btn btn-primary" href="${raids.links?.raid_guide}" target="_blank" rel="noopener">Aktuelle Konter & Bosse</a></p>
+        ${
+          raids.links?.raid_guide
+            ? `<p><a class="btn btn-primary" href="${raids.links.raid_guide}" target="_blank" rel="noopener">Aktuelle Konter & Bosse</a></p>`
+            : ""
+        }
       </div>
     </section>`;
 };
 
-// --- Events ---
 const Events = async () => {
   setBanner("Events", "Spotlight Hour, Raid Hour, Community Day & mehr");
   let events;
   try {
-    events = await fetch("data/events.json").then((r) => r.json());
+    events = await fetch(`data/events.json?v=${Date.now()}`).then((r) =>
+      r.json()
+    );
   } catch {
     events = null;
   }
@@ -189,7 +199,9 @@ const Events = async () => {
         (e) => `
     <div class="row"><div><strong>${e.title}</strong><div class="small">${
           e.date
-        }</div></div><div>${e.icon || "⭐"}</div></div>`
+        }${e.details ? ` – ${e.details}` : ""}</div></div><div>${
+          e.icon || "⭐"
+        }</div></div>`
       )
       .join("") || "<p class='small'>Keine aktuellen Events.</p>";
 
@@ -215,7 +227,76 @@ const Events = async () => {
     </section>`;
 };
 
-// --- PvP ---
+// Helper urls for external Pokédex pages (use slug; works for forms too)
+const hubUrl = (slug) => `https://pokemongohub.net/pokedex/pokemon-go/${slug}/`;
+const gpUrl = (slug) => `https://gamepress.gg/pokemongo/pokemon/${slug}`;
+
+const Eggs = async () => {
+  setBanner("Eier & Ausbrüten", "Eiertypen, Pokémon-Pools & Effizienz");
+  let data;
+  try {
+    data = await fetch(`data/eggs.json?v=${Date.now()}`).then((r) => r.json());
+  } catch {
+    data = null;
+  }
+  if (!data) {
+    app.innerHTML = `<section class="section"><p class="small">Fehler beim Laden der Eier-Daten.</p></section>`;
+    return;
+  }
+
+  const renderEgg = (km, block) => {
+    const list =
+      (block?.pokemon || [])
+        .map(
+          (p) => `
+      <div class="poke-row">
+        <img class="poke-icon" loading="lazy" src="${spriteURL(p)}" alt="${
+            p.name
+          }">
+        <span>
+          <a class="poke-link" href="${hubUrl(
+            p.slug
+          )}" target="_blank" rel="noopener">${p.name}</a>
+          <a class="poke-link-ext" href="${gpUrl(
+            p.slug
+          )}" target="_blank" rel="noopener" aria-label="GamePress">↗</a>
+        </span>
+      </div>
+    `
+        )
+        .join("") || `<p class="small">Keine Daten.</p>`;
+
+    return `
+      <div class="card">
+        <div class="row">
+          <div><span class="pill">${km} km</span></div>
+          <div>${eggDot(String(km))}</div>
+        </div>
+        <div class="grid-2">${list}</div>
+      </div>`;
+  };
+
+  app.innerHTML = `
+    <section class="section">
+      <div class="grid-2">
+        ${renderEgg(2, data.eggs["2km"])}
+        ${renderEgg(5, data.eggs["5km"])}
+        ${renderEgg(7, data.eggs["7km"])}
+        ${renderEgg(10, data.eggs["10km"])}
+        ${renderEgg(12, data.eggs["12km"])}
+      </div>
+      <div class="card" style="margin-top:14px">
+        <h3 style="margin-top:0">Hinweis & Quellen</h3>
+        <p class="small">Pools ändern sich innerhalb der Saison monatlich. Prüfe bei Bedarf:</p>
+        <ul class="small">
+          <li><a target="_blank" rel="noopener" href="https://leekduck.com/eggs/">LeekDuck – Current Eggs</a></li>
+          <li><a target="_blank" rel="noopener" href="https://pokemongohub.net/post/chart/pokemon-go-eggs/">GO Hub – Egg-Chart</a></li>
+        </ul>
+        <p class="small">Zuletzt aktualisiert: ${data.last_updated}</p>
+      </div>
+    </section>`;
+};
+
 const PvP = () => {
   setBanner("PvP & Kämpfe", "Ligen, Ressourcen & Mikro-Tipps");
   app.innerHTML = `
@@ -238,34 +319,12 @@ const PvP = () => {
     </section>`;
 };
 
-// --- Eggs ---
-const Eggs = () => {
-  setBanner("Eier & Ausbrüten", "Eiertypen & Effizienz");
-  app.innerHTML = `
-    <section class="section">
-      <div class="card">
-        <div class="row"><div><span class="pill">2 km</span> Häufige Pokémon.</div><div>🥚</div></div>
-        <div class="row"><div><span class="pill">5 km</span> Regionale Pokémon.</div><div>🥚</div></div>
-        <div class="row"><div><span class="pill">10 km</span> Seltene Pokémon.</div><div>🥚</div></div>
-        <div class="row"><div><span class="pill">12 km</span> Von Team GO Rocket-Bossen.</div><div>🥚</div></div>
-      </div>
-      <div class="card">
-        <h3 style="margin-top:0">Effizienz-Tipps</h3>
-        <ul>
-          <li>„Abenteuer-Sync“ aktivieren – Schritte zählen auch ohne aktives Spiel.</li>
-          <li>Mehrere Eier parallel mit zusätzlichen Brutmaschinen ausbrüten.</li>
-        </ul>
-      </div>
-    </section>`;
-};
-
-// --- Resources ---
 const Resources = () => {
   setBanner("Ressourcen", "Links & Tools für Trainer");
   app.innerHTML = `
     <section class="section">
       <div class="grid-3">
-        <a class="card" href="https://www.pokebattler.com" target="_blank" rel="noopener">
+        <a class="card" href="https://www.pokebattler.com/raids" target="_blank" rel="noopener">
           <div class="icon i-raids">⚔️</div><div class="name">Pokebattler</div><div class="small">Raid-Guides & Konter.</div>
         </a>
         <a class="card" href="https://leekduck.com/events/" target="_blank" rel="noopener">
@@ -278,7 +337,7 @@ const Resources = () => {
     </section>`;
 };
 
-// --- Router ---
+// ---------- Router ----------
 const routes = {
   "": Home,
   "/": Home,
@@ -289,7 +348,6 @@ const routes = {
   "/eier-ausbruten": Eggs,
   "/ressourcen": Resources,
 };
-
 function router() {
   const hash = location.hash.replace(/^#/, "");
   const view =
@@ -300,6 +358,5 @@ function router() {
     });
   view();
 }
-
 window.addEventListener("hashchange", router);
 window.addEventListener("load", router);

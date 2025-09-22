@@ -1,0 +1,40 @@
+{
+  "last_updated": "23-09-2025",
+  "eggs": {
+    "2km": {
+      "pokemon": [
+        { "name": "Pikachu", "slug": "pikachu" },
+        { "name": "Bisasam", "slug": "bulbasaur" },
+        { "name": "Hoppspross", "slug": "hoppip" }
+      ]
+    },
+    "5km": {
+      "pokemon": [
+        { "name": "Miltank", "slug": "miltank" },
+        { "name": "Kaumalat", "slug": "gible" }
+      ]
+    },
+    "7km": {
+      "pokemon": [
+        { "name": "Alola-Vulpix", "slug": "vulpix-alola" },
+        { "name": "Galar-Ponita", "slug": "ponyta-galar" }
+      ]
+    },
+    "10km": {
+      "pokemon": [
+        { "name": "Riolu", "slug": "riolu" },
+        { "name": "Milza", "slug": "axew" }
+      ]
+    },
+    "12km": {
+      "pokemon": [
+        { "name": "Zurrokex", "slug": "scraggy" },
+        { "name": "Gladiantri", "slug": "pawniard" }
+      ]
+    }
+  },
+  "sources": [
+    "https://leekduck.com/eggs/",
+    "https://pokemongohub.net/post/chart/pokemon-go-eggs/"
+  ]
+}

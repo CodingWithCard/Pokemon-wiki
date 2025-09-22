@@ -43,6 +43,7 @@ a:hover {
   padding: 16px;
 }
 
+/* Topbar */
 .topbar {
   position: sticky;
   top: 0;
@@ -75,6 +76,7 @@ a:hover {
   background: #0f1a2e;
 }
 
+/* Banner */
 .banner {
   position: relative;
   margin: 14px auto;
@@ -114,6 +116,7 @@ a:hover {
   opacity: 0.95;
 }
 
+/* Sections & cards */
 .section {
   background: linear-gradient(180deg, var(--panel), #0b1220);
   border: 1px solid var(--border);
@@ -289,4 +292,69 @@ summary::-webkit-details-marker {
 }
 .sep {
   opacity: 0.6;
+}
+
+/* Eggs page styles */
+.eggdot {
+  --c: #e5e7eb;
+  display: inline-block;
+  width: 46px;
+  height: 46px;
+  border-radius: 999px;
+  background: radial-gradient(circle at 35% 35%, #fff 0 26%, transparent 27%),
+    var(--c);
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.35);
+}
+.poke-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 10px 2px;
+  min-height: 64px;
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+.poke-icon {
+  width: 72px;
+  height: 72px;
+  object-fit: contain;
+  flex-shrink: 0;
+  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.6));
+}
+/* Links for Pokémon rows */
+.poke-link {
+  color: #e5e7eb;
+  font-weight: 700;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+}
+.poke-link:hover {
+  border-bottom-color: rgba(229, 231, 235, 0.5);
+}
+
+.poke-link-ext {
+  margin-left: 6px;
+  font-size: 0.9rem;
+  color: #9ca3af;
+  text-decoration: none;
+  opacity: 0.8;
+}
+.poke-link-ext:hover {
+  opacity: 1;
+  color: #cbd5e1;
+}
+.card .grid-2 {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+}
+@media (min-width: 680px) {
+  .card .grid-2 {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+@media (min-width: 980px) {
+  .card .grid-2 {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
 }
