@@ -9,17 +9,17 @@
   <body>
     <header class="topbar">
       <div class="container">
+        <div class="brand">Pokémon GO – Wiki</div>
         <button
-          class="burger"
-          id="burger"
+          class="nav-toggle"
           aria-label="Menü öffnen"
           aria-controls="nav-drawer"
           aria-expanded="false"
         >
-          <span></span><span></span><span></span>
+          <span class="bar"></span><span class="bar"></span
+          ><span class="bar"></span>
         </button>
-        <div class="brand">Pokémon GO – Wiki</div>
-        <nav class="nav desktop">
+        <nav class="nav">
           <a href="index.html">Start</a>
           <a href="raids.html">Raids</a>
           <a href="eggs.html">Eier</a>
@@ -31,27 +31,22 @@
           <a href="links.html">Links</a>
         </nav>
       </div>
-    </header>
-
-    <div class="drawer" id="nav-drawer" hidden>
-      <div class="drawer-backdrop" data-close></div>
-      <div class="drawer-panel">
-        <nav class="drawer-grid">
-          <a href="index.html" data-close>Start</a>
-          <a href="raids.html" data-close>Raids</a>
-          <a href="eggs.html" data-close>Eier</a>
-          <a href="rocket.html" data-close>Rocket</a>
-          <a href="meta.html" data-close>Meta</a>
-          <a href="pvp.html" data-close>PvP</a>
-          <a href="trades.html" data-close>Tauschen</a>
-          <a href="tips.html" data-close>Tipps</a>
-          <a href="links.html" data-close>Links</a>
+      <div id="nav-drawer" class="nav-drawer" hidden>
+        <div class="nav-backdrop" data-close></div>
+        <nav class="nav-sheet" role="dialog" aria-modal="true">
+          <a href="index.html">Start</a>
+          <a href="raids.html">Raids</a>
+          <a href="eggs.html">Eier</a>
+          <a href="rocket.html">Rocket</a>
+          <a href="meta.html">Meta</a>
+          <a href="pvp.html">PvP</a>
+          <a href="trades.html">Tauschen</a>
+          <a href="tips.html">Tipps</a>
+          <a href="links.html">Links</a>
+          <button class="nav-close" data-close>Schließen</button>
         </nav>
-        <button class="drawer-close" data-close aria-label="Menü schließen">
-          Schließen
-        </button>
       </div>
-    </div>
+    </header>
 
     <div class="banner">
       <div
@@ -62,7 +57,7 @@
       ></div>
       <div class="banner-overlay">
         <h1>Must-have Angreifer</h1>
-        <p>S–D Tierliste</p>
+        <p>S–D Tierliste, gepflegt im Google Sheet</p>
       </div>
     </div>
 

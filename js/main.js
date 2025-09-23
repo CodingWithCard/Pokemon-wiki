@@ -5,9 +5,49 @@ import { renderEggs } from "./render/eggs.js";
 import { renderRocket } from "./render/rocket.js";
 import { renderMetaRaids, renderMetaPvp } from "./render/meta.js";
 
+/* =========================
+   Mobile nav (hamburger)
+   ========================= */
+function initMobileNav() {
+  const toggle = document.querySelector(".nav-toggle");
+  const drawer = document.getElementById("nav-drawer");
+  if (!toggle || !drawer) return;
+
+  const sheet = drawer.querySelector(".nav-sheet");
+  const closers = drawer.querySelectorAll("[data-close], .nav-sheet a");
+
+  function open() {
+    drawer.hidden = false;
+    requestAnimationFrame(() => drawer.classList.add("open"));
+    toggle.setAttribute("aria-expanded", "true");
+    document.body.style.overflow = "hidden";
+    sheet?.querySelector("a,button")?.focus?.();
+  }
+  function close() {
+    drawer.classList.remove("open");
+    toggle.setAttribute("aria-expanded", "false");
+    document.body.style.overflow = "";
+    setTimeout(() => {
+      drawer.hidden = true;
+    }, 180);
+  }
+
+  toggle.addEventListener("click", () => {
+    const expanded = toggle.getAttribute("aria-expanded") === "true";
+    expanded ? close() : open();
+  });
+  closers.forEach((el) => el.addEventListener("click", close));
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && !drawer.hidden) close();
+  });
+}
+
+/* =========================
+   Page boot
+   ========================= */
 document.addEventListener("DOMContentLoaded", async () => {
   try {
-    setupMobileNav(); // <<< init burger/drawer
+    initMobileNav();
 
     const page = document
       .querySelector("[data-page]")
@@ -32,7 +72,8 @@ document.addEventListener("DOMContentLoaded", async () => {
       renderMetaPvp(meta);
       return;
     }
-    // other pages: static
+
+    // other static pages don't need JS
   } catch (e) {
     console.error("Load error", e);
     const page = document.querySelector("[data-page]");
@@ -44,29 +85,3 @@ document.addEventListener("DOMContentLoaded", async () => {
       );
   }
 });
-
-/* ===== Mobile nav toggle ===== */
-function setupMobileNav() {
-  const burger = document.getElementById("burger");
-  const drawer = document.getElementById("nav-drawer");
-  if (!burger || !drawer) return;
-
-  const open = () => {
-    drawer.hidden = false;
-    document.documentElement.classList.add("navlock");
-    burger.setAttribute("aria-expanded", "true");
-  };
-  const close = () => {
-    drawer.hidden = true;
-    document.documentElement.classList.remove("navlock");
-    burger.setAttribute("aria-expanded", "false");
-  };
-
-  burger.addEventListener("click", () => (drawer.hidden ? open() : close()));
-  drawer.addEventListener("click", (e) => {
-    if (e.target.matches(".drawer-backdrop, [data-close]")) close();
-  });
-  window.addEventListener("keydown", (e) => {
-    if (e.key === "Escape" && !drawer.hidden) close();
-  });
-}
