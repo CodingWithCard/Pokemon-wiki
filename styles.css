@@ -305,3 +305,109 @@ img {
   object-fit: contain;
   image-rendering: auto;
 }
+
+/* ================================
+   E G G S   P A G E   (compact)
+   ================================ */
+
+/* container tweaks */
+.eggs-section {
+  padding-top: 14px;
+  padding-bottom: 12px;
+}
+
+.egg-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.egg-title {
+  margin: 0;
+}
+
+/* Pokémon rows under each egg tier */
+.egg-list {
+  display: grid;
+  gap: 8px;
+}
+
+.egg-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 0;
+  border-bottom: 1px solid rgba(28, 42, 61, 0.6);
+}
+.egg-row:last-child {
+  border-bottom: none;
+}
+
+.egg-text .name {
+  margin: 0;
+}
+.egg-dex {
+  opacity: 0.8;
+}
+
+/* Globally big enough, but clamp smaller for Eggs */
+.poke-icon {
+  width: 64px;
+  height: 64px;
+  object-fit: contain;
+  image-rendering: auto;
+  flex-shrink: 0;
+}
+
+/* In eggs list specifically we want smaller icons */
+#eggs-root .poke-icon,
+#eggs .poke-icon {
+  width: 48px;
+  height: 48px;
+}
+
+/* Colored egg dots (match GO look by distance) */
+.eggdot {
+  display: inline-block;
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+  margin-right: 2px;
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.25), 0 2px 8px rgba(0, 0, 0, 0.25);
+}
+
+/* 2 km: green */
+.egg-2 {
+  background: radial-gradient(circle at 30% 30%, #e7ffe7 0 52%, transparent 53%),
+    radial-gradient(circle at 65% 65%, #eaffea 0 50%, transparent 51%),
+    linear-gradient(180deg, #7acb6f, #4aa54a 60%, #3a8c3a);
+}
+
+/* 5 km: orange */
+.egg-5 {
+  background: radial-gradient(circle at 30% 30%, #fff2e6 0 52%, transparent 53%),
+    radial-gradient(circle at 65% 65%, #ffe9d3 0 50%, transparent 51%),
+    linear-gradient(180deg, #f9a24f, #ee7f22 60%, #d36512);
+}
+
+/* 7 km: yellow with pinkish spots */
+.egg-7 {
+  background: radial-gradient(circle at 30% 30%, #ffeef9 0 52%, transparent 53%),
+    radial-gradient(circle at 65% 65%, #ffe3f4 0 50%, transparent 51%),
+    linear-gradient(180deg, #ffd34a, #f4bf22 60%, #e2a90a);
+}
+
+/* 10 km: purple/blue */
+.egg-10 {
+  background: radial-gradient(circle at 30% 30%, #eedeff 0 52%, transparent 53%),
+    radial-gradient(circle at 65% 65%, #e6d1ff 0 50%, transparent 51%),
+    linear-gradient(180deg, #9b7bf3, #7c5ce2 60%, #6245c8);
+}
+
+/* 12 km (Strange Egg): red/black */
+.egg-12 {
+  background: radial-gradient(circle at 30% 30%, #ffcfcf 0 52%, transparent 53%),
+    radial-gradient(circle at 65% 65%, #ffbaba 0 50%, transparent 51%),
+    linear-gradient(180deg, #d43b3b, #b91c1c 60%, #841313);
+}
