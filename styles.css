@@ -48,9 +48,7 @@ img {
   padding: 16px;
 }
 
-/* =========================
-   TOPBAR + NAV
-   ========================= */
+/* Topbar */
 .topbar {
   position: sticky;
   top: 0;
@@ -70,114 +68,23 @@ img {
   color: #fff;
 }
 
-/* Desktop nav (original .nav) */
-.nav {
+/* Desktop nav */
+.nav.desktop {
   margin-left: auto;
   display: flex;
   gap: 8px;
   flex-wrap: wrap;
 }
-.nav a {
+.nav.desktop a {
   padding: 10px 12px;
   border-radius: 12px;
 }
-.nav a.active,
-.nav a:hover {
+.nav.desktop a.active,
+.nav.desktop a:hover {
   background: #0f1a2e;
 }
 
-/* Mobile hamburger */
-.nav-toggle {
-  display: none;
-  background: transparent;
-  border: 0;
-  padding: 8px;
-  margin-left: auto;
-  border-radius: 10px;
-  cursor: pointer;
-}
-.nav-toggle:focus-visible {
-  outline: 2px solid #60a5fa;
-  outline-offset: 2px;
-}
-.nav-toggle .bar {
-  display: block;
-  width: 22px;
-  height: 2px;
-  background: #fff;
-  border-radius: 2px;
-  margin: 4px 0;
-}
-
-/* Drawer */
-.nav-drawer {
-  position: fixed;
-  inset: 0;
-  display: grid;
-  grid-template-columns: 1fr;
-  z-index: 60;
-}
-.nav-drawer[hidden] {
-  display: none;
-}
-.nav-backdrop {
-  position: absolute;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.45);
-}
-.nav-sheet {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  right: 0;
-  width: min(86vw, 340px);
-  background: #0f172a;
-  border-left: 1px solid #1c2a3d;
-  padding: 14px;
-  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.5);
-  transform: translateX(100%);
-  transition: transform 0.18s ease;
-  overflow: auto;
-}
-.nav-drawer.open .nav-sheet {
-  transform: translateX(0);
-}
-.nav-sheet a {
-  display: block;
-  padding: 12px 10px;
-  border-radius: 10px;
-  color: #e5e7eb;
-  text-decoration: none;
-}
-.nav-sheet a:hover {
-  background: #0b1220;
-}
-.nav-close {
-  display: block;
-  width: 100%;
-  margin-top: 10px;
-  padding: 10px 12px;
-  border: 0;
-  border-radius: 10px;
-  background: #1f2937;
-  color: #e5e7eb;
-  font-weight: 700;
-  cursor: pointer;
-}
-
-/* Show hamburger & hide desktop nav on small screens */
-@media (max-width: 900px) {
-  .nav {
-    display: none;
-  }
-  .nav-toggle {
-    display: inline-block;
-  }
-}
-
-/* =========================
-   BANNER
-   ========================= */
+/* Banner */
 .banner {
   position: relative;
   margin: 14px auto;
@@ -217,9 +124,7 @@ img {
   opacity: 0.95;
 }
 
-/* =========================
-   SECTIONS & CARDS
-   ========================= */
+/* Sections & cards */
 .section {
   background: linear-gradient(180deg, var(--panel), #0b1220);
   border: 1px solid var(--border);
@@ -241,7 +146,6 @@ img {
 .lead {
   color: var(--muted);
 }
-
 .grid-3 {
   display: grid;
   gap: 12px;
@@ -300,9 +204,7 @@ img {
   opacity: 0.6;
 }
 
-/* =========================
-   LIST/CARD GRIDS
-   ========================= */
+/* Lists */
 .h2 {
   font-size: 22px;
   font-weight: 900;
@@ -366,43 +268,46 @@ img {
 .mon .title {
   font-weight: 800;
 }
-.meta {
-  color: var(--muted);
-  font-size: 13px;
-}
+.meta,
 .small {
   color: var(--muted);
   font-size: 13px;
 }
 
-/* =========================
-   EGGS (compact list)
-   ========================= */
-.egg-group {
-  margin-top: 14px;
+/* Eggs (compact) */
+.eggs-section {
+  padding-top: 14px;
+  padding-bottom: 12px;
 }
-.egg-head {
+.egg-header {
   display: flex;
   align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+.egg-title {
+  margin: 0;
+}
+.egg-list {
+  display: grid;
   gap: 8px;
 }
-.eggdot {
-  --c: #e5e7eb;
-  width: 32px;
-  height: 32px;
-  border-radius: 999px;
-  display: inline-block;
-  background: radial-gradient(circle at 35% 35%, #fff 0 25%, transparent 26%),
-    var(--c);
-  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.25);
+.egg-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 0;
+  border-bottom: 1px solid rgba(28, 42, 61, 0.6);
 }
-
-.slot {
-  font-weight: 800;
-  margin-top: 6px;
+.egg-row:last-child {
+  border-bottom: none;
 }
-
-/* Global icon clamp */
+.egg-text .name {
+  margin: 0;
+}
+.egg-dex {
+  opacity: 0.8;
+}
 .poke-icon {
   width: 64px;
   height: 64px;
@@ -410,15 +315,13 @@ img {
   image-rendering: auto;
   flex-shrink: 0;
 }
-
-/* Eggs list smaller icons */
 #eggs-root .poke-icon,
 #eggs .poke-icon {
   width: 48px;
   height: 48px;
 }
 
-/* Egg dots (GO-like by distance) */
+/* Colored egg dots */
 .eggdot {
   display: inline-block;
   width: 44px;
@@ -427,79 +330,119 @@ img {
   margin-right: 2px;
   box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.25), 0 2px 8px rgba(0, 0, 0, 0.25);
 }
-/* 2 km */
 .egg-2 {
   background: radial-gradient(circle at 30% 30%, #e7ffe7 0 52%, transparent 53%),
     radial-gradient(circle at 65% 65%, #eaffea 0 50%, transparent 51%),
     linear-gradient(180deg, #7acb6f, #4aa54a 60%, #3a8c3a);
 }
-/* 5 km */
 .egg-5 {
   background: radial-gradient(circle at 30% 30%, #fff2e6 0 52%, transparent 53%),
     radial-gradient(circle at 65% 65%, #ffe9d3 0 50%, transparent 51%),
     linear-gradient(180deg, #f9a24f, #ee7f22 60%, #d36512);
 }
-/* 7 km */
 .egg-7 {
   background: radial-gradient(circle at 30% 30%, #ffeef9 0 52%, transparent 53%),
     radial-gradient(circle at 65% 65%, #ffe3f4 0 50%, transparent 51%),
     linear-gradient(180deg, #ffd34a, #f4bf22 60%, #e2a90a);
 }
-/* 10 km */
 .egg-10 {
   background: radial-gradient(circle at 30% 30%, #eedeff 0 52%, transparent 53%),
     radial-gradient(circle at 65% 65%, #e6d1ff 0 50%, transparent 51%),
     linear-gradient(180deg, #9b7bf3, #7c5ce2 60%, #6245c8);
 }
-/* 12 km */
 .egg-12 {
   background: radial-gradient(circle at 30% 30%, #ffcfcf 0 52%, transparent 53%),
     radial-gradient(circle at 65% 65%, #ffbaba 0 50%, transparent 51%),
     linear-gradient(180deg, #d43b3b, #b91c1c 60%, #841313);
 }
 
-/* =========================
-   PvP & Rocket compact cards (sane image sizes)
-   ========================= */
-#meta-pvp-root img,
-#meta-pvp-root .poke-icon,
-#rocket-root img,
-#rocket-root .poke-icon {
-  width: 64px;
-  height: 64px;
-  object-fit: contain;
-  image-rendering: auto;
-  flex-shrink: 0;
-}
-#meta-pvp-root > .card,
-#meta-pvp-root .entry,
-#meta-pvp-root .row,
-#meta-pvp-root .item,
-#rocket-root > .card,
-#rocket-root .entry,
-#rocket-root .row,
-#rocket-root .item {
-  display: flex;
+/* ===== Mobile nav (hamburger + full-screen drawer) ===== */
+.burger {
+  display: none;
+  border: 0;
+  background: transparent;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  padding: 8px;
   align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+.burger span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: #e5e7eb;
+  border-radius: 2px;
+}
+@media (max-width: 900px) {
+  .burger {
+    display: inline-flex;
+  }
+  .nav.desktop {
+    display: none;
+  }
+}
+
+.drawer {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+}
+.drawer[hidden] {
+  display: none !important;
+}
+.drawer-backdrop {
+  position: absolute;
+  inset: 0;
+  backdrop-filter: blur(6px);
+  background: rgba(3, 7, 18, 0.55);
+}
+.drawer-panel {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  grid-template-rows: 1fr auto;
+  padding: 18px 16px 22px;
+}
+.drawer-grid {
+  align-self: center;
+  justify-self: center;
+  width: min(700px, 92vw);
+  display: grid;
+  grid-template-columns: repeat(2, minmax(120px, 1fr));
   gap: 12px;
+}
+.drawer-grid a {
+  display: grid;
+  place-items: center;
+  text-decoration: none;
+  color: #e5e7eb;
   background: linear-gradient(180deg, var(--panel2), #0b1220);
   border: 1px solid #1c2a3d;
   border-radius: 14px;
-  padding: 10px 12px;
-  margin-bottom: 10px;
+  padding: 14px 10px;
+  font-weight: 800;
+  letter-spacing: 0.2px;
   box-shadow: var(--shadow);
 }
-#meta-pvp-root > .card:hover,
-#rocket-root > .card:hover {
+.drawer-grid a:hover,
+.drawer-grid a:active {
   border-color: #334155;
 }
-#meta-pvp-root .name,
-#rocket-root .name {
+.drawer-close {
+  width: min(700px, 92vw);
+  justify-self: center;
+  margin-top: 10px;
+  background: #fff;
+  color: #0b1220;
   font-weight: 900;
-  margin-bottom: 2px;
+  border: 0;
+  padding: 12px 14px;
+  border-radius: 12px;
 }
-#meta-pvp-root .meta,
-#rocket-root .meta {
-  font-size: 13px;
-  color: var(--muted);
+html.navlock,
+body.navlock {
+  overflow: hidden;
 }
