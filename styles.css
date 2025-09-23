@@ -392,3 +392,122 @@ summary::-webkit-details-marker {
     grid-template-columns: 1fr 1fr 1fr;
   }
 }
+.must-have-card {
+  background: linear-gradient(180deg, var(--panel2), var(--panel));
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 14px;
+  box-shadow: var(--shadow);
+  margin-top: 14px;
+}
+
+.must-have-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 8px 0;
+}
+
+.must-have-icon {
+  width: 64px;
+  height: 64px;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.5));
+}
+.must-have-name {
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+.must-have-tier {
+  font-size: 0.9rem;
+  color: var(--muted);
+  margin-left: auto;
+  padding: 2px 6px;
+  border-radius: 6px;
+  background: var(--panel2);
+}
+/* --- Must-Have Raid Pokémon (tiers) --- */
+.tier-wrap {
+  display: grid;
+  gap: 12px;
+}
+@media (min-width: 680px) {
+  .tier-wrap {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+@media (min-width: 1080px) {
+  .tier-wrap {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+.tier-card {
+  background: linear-gradient(180deg, var(--panel2), #0b1220);
+  border: 1px solid #1c2a3d;
+  border-radius: 16px;
+  padding: 14px;
+  box-shadow: var(--shadow);
+}
+.tier-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+.tier-badge {
+  font-weight: 900;
+  font-size: 13px;
+  padding: 4px 10px;
+  border-radius: 999px;
+}
+.tier-S {
+  background: #0b3b22;
+  color: #c7f9cc;
+  border: 1px solid #1e814f;
+}
+.tier-Ap {
+  background: #25304a;
+  color: #c7d2fe;
+  border: 1px solid #4f46e5;
+}
+.tier-A {
+  background: #2b253f;
+  color: #e9d5ff;
+  border: 1px solid #8b5cf6;
+}
+.tier-B {
+  background: #3b2f0a;
+  color: #fde68a;
+  border: 1px solid #a16207;
+}
+.tier-C {
+  background: #3f1f1f;
+  color: #fecaca;
+  border: 1px solid #b91c1c;
+}
+.tier-D {
+  background: #1f2937;
+  color: #e5e7eb;
+  border: 1px solid #334155;
+}
+.tier-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 10px 0;
+}
+.tier-icon {
+  width: 64px;
+  height: 64px;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.55));
+}
+.tier-name {
+  font-weight: 800;
+}
+.tier-note {
+  color: var(--muted);
+  font-size: 13px;
+  margin-left: auto;
+}
