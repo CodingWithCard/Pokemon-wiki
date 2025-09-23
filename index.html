@@ -2,61 +2,94 @@
 <html lang="de">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Pokémon GO Wissensbasis</title>
-    <meta
-      name="description"
-      content="Pokémon GO Community Wiki – Raids, Events, PvP, Eier, FAQ & Ressourcen."
-    />
-    <link rel="stylesheet" href="styles.css" />
-    <link
-      rel="icon"
-      href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='48' fill='%23e5e7eb'/><path d='M4 50h92' stroke='%23111' stroke-width='10'/><circle cx='50' cy='50' r='16' fill='%23e5e7eb' stroke='%23111' stroke-width='6'/><path d='M50 2a48 48 0 0146 35H4A48 48 0 0150 2z' fill='%23ef4444'/></svg>"
-    />
+    <title>Pokémon GO – Wissensbasis</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="styles.css" rel="stylesheet" />
   </head>
   <body>
     <header class="topbar">
       <div class="container">
-        <a class="brand" href="#/">Pokémon GO Wiki</a>
+        <div class="brand">Pokémon GO – Wiki</div>
         <nav class="nav">
-          <a href="#/faq">FAQ</a>
-          <a href="#/raids-bosse">Raids & Bosse</a>
-          <a href="#/events">Events</a>
-          <a href="#/pvp-kaempfe">PvP</a>
-          <a href="#/eier-ausbruten">Eier</a>
-          <a href="#/team-rocket">Team Rocket</a>
-          <a href="#/ressourcen">Ressourcen</a>
+          <a class="active" href="index.html">Start</a>
+          <a href="raids.html">Raids</a>
+          <a href="eggs.html">Eier</a>
+          <a href="rocket.html">Rocket</a>
+          <a href="meta.html">Meta</a>
+          <a href="pvp.html">PvP</a>
+          <a href="trades.html">Tauschen</a>
+          <a href="tips.html">Tipps</a>
+          <a href="links.html">Links</a>
         </nav>
       </div>
     </header>
 
-    <section class="banner">
+    <div class="banner">
       <div
         class="banner-image"
         style="
-          --src: url('https://drive.google.com/thumbnail?id=1jJX-md52wqNCTo_Dbfw4KYWQI75gNBe-&sz=w2000');
+          --src: url('https://lh3.googleusercontent.com/d/1jJX-md52wqNCTo_Dbfw4KYWQI75gNBe-');
         "
       ></div>
       <div class="banner-overlay">
-        <h1 id="banner-title">Pokémon GO Wissensbasis</h1>
-        <p id="banner-sub">
-          Dein schneller Weg zu Antworten – gemacht von unserer Community.
+        <h1>Willkommen, Trainer!</h1>
+        <p>
+          Aktuelle Raids, Eier, Rocket-Teams & Guides – von der Community, für
+          die Community.
         </p>
       </div>
-    </section>
+    </div>
 
-    <main id="app" class="container"></main>
+    <main class="container" data-page="home">
+      <section class="section">
+        <span class="badge">Schnellstart</span>
+        <div class="grid-3" style="margin-top: 12px">
+          <a class="card" href="raids.html">
+            <div class="icon i-raids">🗼</div>
+            <div class="name">Raids & Bosse</div>
+            <div class="small">Legendäre, Mega & Shadow-Wochenenden</div>
+          </a>
+          <a class="card" href="eggs.html">
+            <div class="icon i-eggs">🥚</div>
+            <div class="name">Eier</div>
+            <div class="small">2/5/7/10/12-km Pools</div>
+          </a>
+          <a class="card" href="rocket.html">
+            <div class="icon i-pvp">🕶️</div>
+            <div class="name">Team Rocket</div>
+            <div class="small">Grunts, Bosse & Giovanni</div>
+          </a>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2 class="name">Beliebte Guides</h2>
+        <div class="grid-3">
+          <a class="card" href="meta.html">
+            <div class="icon i-pvp">💥</div>
+            <div class="name">Must-have Angreifer</div>
+            <div class="small">S–D Tierliste & Alternativen</div>
+          </a>
+          <a class="card" href="pvp.html">
+            <div class="icon i-pvp">⚔️</div>
+            <div class="name">PvP: Perfekte IV</div>
+            <div class="small">Warum 0-15-15? & Beispiele</div>
+          </a>
+          <a class="card" href="trades.html">
+            <div class="icon i-pvp">🔄</div>
+            <div class="name">Tauschen & Kosten</div>
+            <div class="small">Sondertausch & Form-Fallen</div>
+          </a>
+        </div>
+      </section>
+    </main>
 
     <footer class="footer">
-      <div class="container">
-        <span>© <span id="y"></span> Community Wiki</span>
-        <span class="sep">•</span>
-        <a href="#/faq">FAQ</a>
-        <span class="sep">•</span>
-        <a href="#/ressourcen">Ressourcen</a>
+      <div class="container small">
+        Live-Daten aus Google Sheets • GitHub Pages
       </div>
     </footer>
 
-    <script src="app.js" defer></script>
+    <script type="module" src="js/main.js"></script>
   </body>
 </html>
