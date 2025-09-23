@@ -48,6 +48,9 @@ img {
   padding: 16px;
 }
 
+/* =========================
+   TOPBAR + NAV
+   ========================= */
 .topbar {
   position: sticky;
   top: 0;
@@ -66,6 +69,8 @@ img {
   padding: 10px 0;
   color: #fff;
 }
+
+/* Desktop nav (original .nav) */
 .nav {
   margin-left: auto;
   display: flex;
@@ -81,6 +86,98 @@ img {
   background: #0f1a2e;
 }
 
+/* Mobile hamburger */
+.nav-toggle {
+  display: none;
+  background: transparent;
+  border: 0;
+  padding: 8px;
+  margin-left: auto;
+  border-radius: 10px;
+  cursor: pointer;
+}
+.nav-toggle:focus-visible {
+  outline: 2px solid #60a5fa;
+  outline-offset: 2px;
+}
+.nav-toggle .bar {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: #fff;
+  border-radius: 2px;
+  margin: 4px 0;
+}
+
+/* Drawer */
+.nav-drawer {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  z-index: 60;
+}
+.nav-drawer[hidden] {
+  display: none;
+}
+.nav-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+}
+.nav-sheet {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  width: min(86vw, 340px);
+  background: #0f172a;
+  border-left: 1px solid #1c2a3d;
+  padding: 14px;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.5);
+  transform: translateX(100%);
+  transition: transform 0.18s ease;
+  overflow: auto;
+}
+.nav-drawer.open .nav-sheet {
+  transform: translateX(0);
+}
+.nav-sheet a {
+  display: block;
+  padding: 12px 10px;
+  border-radius: 10px;
+  color: #e5e7eb;
+  text-decoration: none;
+}
+.nav-sheet a:hover {
+  background: #0b1220;
+}
+.nav-close {
+  display: block;
+  width: 100%;
+  margin-top: 10px;
+  padding: 10px 12px;
+  border: 0;
+  border-radius: 10px;
+  background: #1f2937;
+  color: #e5e7eb;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+/* Show hamburger & hide desktop nav on small screens */
+@media (max-width: 900px) {
+  .nav {
+    display: none;
+  }
+  .nav-toggle {
+    display: inline-block;
+  }
+}
+
+/* =========================
+   BANNER
+   ========================= */
 .banner {
   position: relative;
   margin: 14px auto;
@@ -120,6 +217,9 @@ img {
   opacity: 0.95;
 }
 
+/* =========================
+   SECTIONS & CARDS
+   ========================= */
 .section {
   background: linear-gradient(180deg, var(--panel), #0b1220);
   border: 1px solid var(--border);
@@ -200,7 +300,9 @@ img {
   opacity: 0.6;
 }
 
-/* Raids / Eggs / Rocket common */
+/* =========================
+   LIST/CARD GRIDS
+   ========================= */
 .h2 {
   font-size: 22px;
   font-weight: 900;
@@ -273,7 +375,9 @@ img {
   font-size: 13px;
 }
 
-/* Eggs – per group */
+/* =========================
+   EGGS (compact list)
+   ========================= */
 .egg-group {
   margin-top: 14px;
 }
@@ -293,65 +397,12 @@ img {
   box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.25);
 }
 
-/* Rocket */
 .slot {
   font-weight: 800;
   margin-top: 6px;
 }
 
-.mon img {
-  width: 72px;
-  height: 72px;
-  object-fit: contain;
-  image-rendering: auto;
-}
-
-/* ================================
-   E G G S   P A G E   (compact)
-   ================================ */
-
-/* container tweaks */
-.eggs-section {
-  padding-top: 14px;
-  padding-bottom: 12px;
-}
-
-.egg-header {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 12px;
-}
-
-.egg-title {
-  margin: 0;
-}
-
-/* Pokémon rows under each egg tier */
-.egg-list {
-  display: grid;
-  gap: 8px;
-}
-
-.egg-row {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 6px 0;
-  border-bottom: 1px solid rgba(28, 42, 61, 0.6);
-}
-.egg-row:last-child {
-  border-bottom: none;
-}
-
-.egg-text .name {
-  margin: 0;
-}
-.egg-dex {
-  opacity: 0.8;
-}
-
-/* Globally big enough, but clamp smaller for Eggs */
+/* Global icon clamp */
 .poke-icon {
   width: 64px;
   height: 64px;
@@ -360,14 +411,14 @@ img {
   flex-shrink: 0;
 }
 
-/* In eggs list specifically we want smaller icons */
+/* Eggs list smaller icons */
 #eggs-root .poke-icon,
 #eggs .poke-icon {
   width: 48px;
   height: 48px;
 }
 
-/* Colored egg dots (match GO look by distance) */
+/* Egg dots (GO-like by distance) */
 .eggdot {
   display: inline-block;
   width: 44px;
@@ -376,38 +427,79 @@ img {
   margin-right: 2px;
   box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.25), 0 2px 8px rgba(0, 0, 0, 0.25);
 }
-
-/* 2 km: green */
+/* 2 km */
 .egg-2 {
   background: radial-gradient(circle at 30% 30%, #e7ffe7 0 52%, transparent 53%),
     radial-gradient(circle at 65% 65%, #eaffea 0 50%, transparent 51%),
     linear-gradient(180deg, #7acb6f, #4aa54a 60%, #3a8c3a);
 }
-
-/* 5 km: orange */
+/* 5 km */
 .egg-5 {
   background: radial-gradient(circle at 30% 30%, #fff2e6 0 52%, transparent 53%),
     radial-gradient(circle at 65% 65%, #ffe9d3 0 50%, transparent 51%),
     linear-gradient(180deg, #f9a24f, #ee7f22 60%, #d36512);
 }
-
-/* 7 km: yellow with pinkish spots */
+/* 7 km */
 .egg-7 {
   background: radial-gradient(circle at 30% 30%, #ffeef9 0 52%, transparent 53%),
     radial-gradient(circle at 65% 65%, #ffe3f4 0 50%, transparent 51%),
     linear-gradient(180deg, #ffd34a, #f4bf22 60%, #e2a90a);
 }
-
-/* 10 km: purple/blue */
+/* 10 km */
 .egg-10 {
   background: radial-gradient(circle at 30% 30%, #eedeff 0 52%, transparent 53%),
     radial-gradient(circle at 65% 65%, #e6d1ff 0 50%, transparent 51%),
     linear-gradient(180deg, #9b7bf3, #7c5ce2 60%, #6245c8);
 }
-
-/* 12 km (Strange Egg): red/black */
+/* 12 km */
 .egg-12 {
   background: radial-gradient(circle at 30% 30%, #ffcfcf 0 52%, transparent 53%),
     radial-gradient(circle at 65% 65%, #ffbaba 0 50%, transparent 51%),
     linear-gradient(180deg, #d43b3b, #b91c1c 60%, #841313);
+}
+
+/* =========================
+   PvP & Rocket compact cards (sane image sizes)
+   ========================= */
+#meta-pvp-root img,
+#meta-pvp-root .poke-icon,
+#rocket-root img,
+#rocket-root .poke-icon {
+  width: 64px;
+  height: 64px;
+  object-fit: contain;
+  image-rendering: auto;
+  flex-shrink: 0;
+}
+#meta-pvp-root > .card,
+#meta-pvp-root .entry,
+#meta-pvp-root .row,
+#meta-pvp-root .item,
+#rocket-root > .card,
+#rocket-root .entry,
+#rocket-root .row,
+#rocket-root .item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: linear-gradient(180deg, var(--panel2), #0b1220);
+  border: 1px solid #1c2a3d;
+  border-radius: 14px;
+  padding: 10px 12px;
+  margin-bottom: 10px;
+  box-shadow: var(--shadow);
+}
+#meta-pvp-root > .card:hover,
+#rocket-root > .card:hover {
+  border-color: #334155;
+}
+#meta-pvp-root .name,
+#rocket-root .name {
+  font-weight: 900;
+  margin-bottom: 2px;
+}
+#meta-pvp-root .meta,
+#rocket-root .meta {
+  font-size: 13px;
+  color: var(--muted);
 }

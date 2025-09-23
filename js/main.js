@@ -5,8 +5,50 @@ import { renderEggs } from "./render/eggs.js";
 import { renderRocket } from "./render/rocket.js";
 import { renderMetaRaids, renderMetaPvp } from "./render/meta.js";
 
+/* =========================
+   Mobile nav (hamburger)
+   ========================= */
+function initMobileNav() {
+  const toggle = document.querySelector(".nav-toggle");
+  const drawer = document.getElementById("nav-drawer");
+  if (!toggle || !drawer) return;
+
+  const sheet = drawer.querySelector(".nav-sheet");
+  const closers = drawer.querySelectorAll("[data-close], .nav-sheet a");
+
+  function open() {
+    drawer.hidden = false;
+    requestAnimationFrame(() => drawer.classList.add("open"));
+    toggle.setAttribute("aria-expanded", "true");
+    document.body.style.overflow = "hidden";
+    sheet?.querySelector("a,button")?.focus?.();
+  }
+  function close() {
+    drawer.classList.remove("open");
+    toggle.setAttribute("aria-expanded", "false");
+    document.body.style.overflow = "";
+    setTimeout(() => {
+      drawer.hidden = true;
+    }, 180);
+  }
+
+  toggle.addEventListener("click", () => {
+    const expanded = toggle.getAttribute("aria-expanded") === "true";
+    expanded ? close() : open();
+  });
+  closers.forEach((el) => el.addEventListener("click", close));
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && !drawer.hidden) close();
+  });
+}
+
+/* =========================
+   Page boot
+   ========================= */
 document.addEventListener("DOMContentLoaded", async () => {
   try {
+    initMobileNav();
+
     const page = document
       .querySelector("[data-page]")
       ?.getAttribute("data-page");
